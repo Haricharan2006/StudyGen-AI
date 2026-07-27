@@ -22,9 +22,13 @@ router.post("/", upload.single("file"), async (req, res) => {
     );
 
     const content = await generateFromDocument(
-      text,
-      type
-    );
+  text,
+  type
+);
+
+console.log("========== AI RESPONSE ==========");
+console.log(content);
+console.log("================================");
 
     res.json({
       success: true,

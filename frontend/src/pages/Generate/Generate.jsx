@@ -44,6 +44,17 @@ function Generate() {
         type,
       };
 
+      // Automatically save generation history
+      try {
+        await api.post("/api/history", {
+          topic: file ? file.name : topic,
+          type,
+          content: response.data.content,
+        });
+      } catch (historyError) {
+        console.error("History save failed:", historyError);
+      }
+
       switch (type) {
         case "flashcards":
           navigate("/flashcards", { state: data });
