@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 
 function Signup() {
   const navigate = useNavigate();
@@ -26,10 +26,7 @@ function Signup() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
-        formData
-      );
+      const res = await api.post("/auth/signup", formData);
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));

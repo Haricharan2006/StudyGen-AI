@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,10 +25,7 @@ function Login() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+      const res = await api.post("/auth/login", formData);
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -53,7 +50,6 @@ function Login() {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <input
             type="email"
             name="email"
@@ -81,15 +77,11 @@ function Login() {
           >
             {loading ? "Logging In..." : "Login"}
           </button>
-
         </form>
 
         <p className="text-center mt-4">
           Don't have an account?{" "}
-          <Link
-            to="/signup"
-            className="text-green-600 font-semibold"
-          >
+          <Link to="/signup" className="text-green-600 font-semibold">
             Sign Up
           </Link>
         </p>

@@ -26,13 +26,13 @@ function Generate() {
         formData.append("file", file);
         formData.append("type", type);
 
-        response = await api.post("/api/upload", formData, {
+        response = await api.post("/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
       } else {
-        response = await api.post("/api/generate", {
+        response = await api.post("/generate", {
           topic,
           type,
         });
@@ -44,9 +44,8 @@ function Generate() {
         type,
       };
 
-      // Automatically save generation history
       try {
-        await api.post("/api/history", {
+        await api.post("/history", {
           topic: file ? file.name : topic,
           type,
           content: response.data.content,

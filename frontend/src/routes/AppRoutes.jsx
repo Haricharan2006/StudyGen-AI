@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 import Home from "../pages/Home/Home";
 import Dashboard from "../pages/Dashboard/Dashboard";
@@ -28,7 +29,7 @@ function AppRoutes() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          
+
           <Route path="/generate" element={<Generate />} />
           <Route path="/results" element={<Results />} />
           <Route path="/flashcards" element={<Flashcards />} />
@@ -37,11 +38,17 @@ function AppRoutes() {
         </Route>
 
         {/* Dashboard Pages */}
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/settings" element={<Settings />} />
-        </Route>
+        <Route
+  element={
+    <ProtectedRoute>
+      <DashboardLayout />
+    </ProtectedRoute>
+  }
+>
+  <Route path="/dashboard" element={<Dashboard />} />
+  <Route path="/history" element={<History />} />
+  <Route path="/settings" element={<Settings />} />
+</Route>
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />

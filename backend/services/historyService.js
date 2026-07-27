@@ -1,48 +1,37 @@
-const fs = require("fs");
-const path = require("path");
+const History = require("../models/History");
 
-const historyPath = path.join(__dirname, "..", "data", "history.json");
+async function addHistory(userId, item) {
+  try {
+    console.log("History model:", History);
+    console.log("userId:", userId);
+    console.log("item:", item);
 
-function readHistory() {
-  if (!fs.existsSync(historyPath)) {
-    fs.writeFileSync(historyPath, "[]");
+    const saved = await History.create({
+      user: userId,
+      topic: item.topic || "Untitled",
+      type: item.type,
+      content: item.content,
+    });
+
+    console.log("Saved:", saved);
+
+    return saved;
+  } catch (err) {
+    console.error("ERROR INSIDE addHistory:");
+    console.error(err);
+    throw err;
   }
-
-  const data = fs.readFileSync(historyPath, "utf8");
-
-  return JSON.parse(data);
 }
 
-function saveHistory(history) {
-  fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+async function getHistory(userId) {
+  return await History.find({ user: userId }).sort({ createdAt: -1 });
 }
 
-function addHistory(item) {
-  const history = readHistory();
-
-  const newItem = {
-    id: Date.now().toString(),
-    ...item,
-    createdAt: new Date().toISOString(),
-  };
-
-  history.unshift(newItem);
-
-  saveHistory(history);
-
-  return newItem;
-}
-
-function getHistory() {
-  return readHistory();
-}
-
-function deleteHistory(id) {
-  const history = readHistory();
-
-  const updatedHistory = history.filter(item => item.id !== id);
-
-  saveHistory(updatedHistory);
+async function deleteHistory(userId, historyId) {
+  return await History.findOneAndDelete({
+    _id: historyId,
+    user: userId,
+  });
 }
 
 module.exports = {

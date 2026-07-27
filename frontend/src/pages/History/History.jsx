@@ -15,7 +15,7 @@ function History() {
 
   const fetchHistory = async () => {
     try {
-      const response = await api.get("/api/history");
+      const response = await api.get("/history");
       setHistory(response.data.history);
     } catch (error) {
       console.error(error);
@@ -27,8 +27,8 @@ function History() {
 
   const deleteItem = async (id) => {
     try {
-      await api.delete(`/api/history/${id}`);
-      setHistory(history.filter((item) => item.id !== id));
+      await api.delete(`/history/${id}`);
+      setHistory((prev) => prev.filter((item) => item._id !== id));
     } catch (error) {
       console.error(error);
       alert("Failed to delete history.");
@@ -67,7 +67,6 @@ function History() {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-6">
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-
         <h1 className="text-4xl font-bold text-center mb-2">
           History
         </h1>
@@ -96,11 +95,10 @@ function History() {
           <div className="space-y-5">
             {filteredHistory.map((item) => (
               <div
-                key={item.id}
+                key={item._id}
                 className="border rounded-xl p-5 hover:shadow-lg transition bg-white"
               >
                 <div className="flex justify-between items-start">
-
                   <div
                     className="cursor-pointer flex-1"
                     onClick={() => openHistory(item)}
@@ -119,18 +117,16 @@ function History() {
                   </div>
 
                   <button
-                    onClick={() => deleteItem(item.id)}
+                    onClick={() => deleteItem(item._id)}
                     className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
                   >
                     Delete
                   </button>
-
                 </div>
               </div>
             ))}
           </div>
         )}
-
       </div>
     </div>
   );
