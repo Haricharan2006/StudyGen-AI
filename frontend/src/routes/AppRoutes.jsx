@@ -14,6 +14,9 @@ import Settings from "../pages/Settings/Settings";
 import Results from "../pages/Results/Results";
 import NotFound from "../pages/NotFound/NotFound";
 
+import Login from "../pages/Auth/Login";
+import Signup from "../pages/Auth/Signup";
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -22,6 +25,10 @@ function AppRoutes() {
         {/* Public Pages */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          
           <Route path="/generate" element={<Generate />} />
           <Route path="/results" element={<Results />} />
           <Route path="/flashcards" element={<Flashcards />} />
