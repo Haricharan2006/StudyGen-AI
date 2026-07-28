@@ -44,16 +44,6 @@ function Generate() {
         type,
       };
 
-      try {
-        await api.post("/history", {
-          topic: file ? file.name : topic,
-          type,
-          content: response.data.content,
-        });
-      } catch (historyError) {
-        console.error("History save failed:", historyError);
-      }
-
       switch (type) {
         case "flashcards":
           navigate("/flashcards", { state: data });
@@ -79,124 +69,184 @@ function Generate() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-6">
-      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-        <h1 className="text-4xl font-bold text-center mb-2">
-          Generate Study Material
-        </h1>
+    <div className="min-h-screen bg-slate-950 px-6 py-10">
 
-        <p className="text-center text-gray-500 mb-10">
-          Upload a document or enter a topic to generate AI-powered study
-          material.
-        </p>
+      <div className="mx-auto max-w-6xl rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl">
 
-        <label className="block text-lg font-semibold mb-2">
-          Enter Topic
-        </label>
+        <div className="rounded-t-3xl bg-gradient-to-r from-blue-700 via-cyan-600 to-indigo-700 p-10">
 
-        <input
-          type="text"
-          placeholder="Machine Learning"
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
-          className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-blue-500 mb-8"
-        />
+          <h1 className="text-center text-5xl font-extrabold text-white">
+            🚀 AI Study Generator
+          </h1>
 
-        <label className="block text-lg font-semibold mb-4">
-          Upload PDF / DOCX
-        </label>
-
-        <label className="border-2 border-dashed border-blue-400 rounded-xl p-10 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-50 transition mb-8">
-          <div className="text-6xl mb-4">📄</div>
-
-          <h2 className="text-xl font-semibold">
-            Click to Upload
-          </h2>
-
-          <p className="text-gray-500 mt-2">
-            PDF or DOCX (Max 10 MB)
+          <p className="mt-4 text-center text-lg text-blue-100">
+            Generate AI-powered Notes, Flashcards, Quizzes and Summaries
+            instantly from a topic or uploaded document.
           </p>
 
-          <input
-            type="file"
-            accept=".pdf,.doc,.docx"
-            className="hidden"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </label>
-
-        {file && (
-          <div className="bg-green-100 border border-green-300 rounded-xl p-4 mb-8">
-            <p className="font-semibold text-green-700">
-              Selected File
-            </p>
-
-            <p>{file.name}</p>
-          </div>
-        )}
-
-        <label className="block text-lg font-semibold mb-4">
-          Select Output
-        </label>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          <button
-            onClick={() => setType("notes")}
-            className={`rounded-xl p-4 font-semibold transition ${
-              type === "notes"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
-            }`}
-          >
-            📝 Notes
-          </button>
-
-          <button
-            onClick={() => setType("flashcards")}
-            className={`rounded-xl p-4 font-semibold transition ${
-              type === "flashcards"
-                ? "bg-green-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
-            }`}
-          >
-            🧠 Flashcards
-          </button>
-
-          <button
-            onClick={() => setType("quiz")}
-            className={`rounded-xl p-4 font-semibold transition ${
-              type === "quiz"
-                ? "bg-purple-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
-            }`}
-          >
-            ❓ Quiz
-          </button>
-
-          <button
-            onClick={() => setType("summary")}
-            className={`rounded-xl p-4 font-semibold transition ${
-              type === "summary"
-                ? "bg-orange-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
-            }`}
-          >
-            📚 Summary
-          </button>
         </div>
 
-        <button
-          onClick={handleGenerate}
-          disabled={loading}
-          className={`w-full py-4 rounded-xl text-lg font-semibold transition ${
-            loading
-              ? "bg-gray-500 cursor-not-allowed text-white"
-              : "bg-blue-700 hover:bg-blue-800 text-white"
-          }`}
-        >
-          {loading ? "Generating..." : "🚀 Generate Study Material"}
-        </button>
+        <div className="p-8">
+
+          <label className="mb-3 block text-lg font-semibold text-white">
+            Study Topic
+          </label>
+
+          <input
+            type="text"
+            placeholder="Example: Machine Learning"
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+            className="mb-8 w-full rounded-2xl border border-slate-700 bg-slate-800 p-4 text-white placeholder:text-slate-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <label className="mb-4 block text-lg font-semibold text-white">
+            Upload PDF / DOCX
+          </label>
+
+          <label className="group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed border-blue-500 bg-slate-800 p-12 transition-all duration-300 hover:border-cyan-400 hover:bg-slate-700">
+
+            <div className="mb-5 text-7xl transition-transform duration-300 group-hover:scale-110">
+              📄
+            </div>
+
+            <h2 className="text-2xl font-bold text-white">
+              Drag & Drop or Click to Upload
+            </h2>
+
+            <p className="mt-3 text-slate-400">
+              Supports PDF and DOCX files (Max 10 MB)
+            </p>
+
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx"
+              className="hidden"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+
+          </label>
+
+          {file && (
+            <div className="mt-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+
+              <p className="font-bold text-emerald-400">
+                ✅ File Selected
+              </p>
+
+              <p className="mt-2 text-white">
+                {file.name}
+              </p>
+
+            </div>
+          )}
+
+          <label className="mb-4 mt-10 block text-lg font-semibold text-white">
+            Choose Output Type
+          </label>
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+
+            <button
+              onClick={() => setType("notes")}
+              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
+                type === "notes"
+                  ? "border-blue-500 bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-xl"
+                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-blue-500 hover:bg-slate-700"
+              }`}
+            >
+              <div className="text-4xl">📝</div>
+
+              <h3 className="mt-4 text-xl font-bold">
+                Notes
+              </h3>
+
+              <p className="mt-2 text-sm opacity-80">
+                Detailed AI generated notes.
+              </p>
+            </button>
+
+            <button
+              onClick={() => setType("flashcards")}
+              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
+                type === "flashcards"
+                  ? "border-emerald-500 bg-gradient-to-br from-emerald-600 to-green-500 text-white shadow-xl"
+                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-emerald-500 hover:bg-slate-700"
+              }`}
+            >
+              <div className="text-4xl">🧠</div>
+
+              <h3 className="mt-4 text-xl font-bold">
+                Flashcards
+              </h3>
+
+              <p className="mt-2 text-sm opacity-80">
+                Revise quickly with AI cards.
+              </p>
+            </button>
+
+            <button
+              onClick={() => setType("quiz")}
+              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
+                type === "quiz"
+                  ? "border-violet-500 bg-gradient-to-br from-violet-600 to-fuchsia-500 text-white shadow-xl"
+                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-violet-500 hover:bg-slate-700"
+              }`}
+            >
+              <div className="text-4xl">❓</div>
+
+              <h3 className="mt-4 text-xl font-bold">
+                Quiz
+              </h3>
+
+              <p className="mt-2 text-sm opacity-80">
+                Test your understanding.
+              </p>
+            </button>
+
+            <button
+              onClick={() => setType("summary")}
+              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
+                type === "summary"
+                  ? "border-orange-500 bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-xl"
+                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-orange-500 hover:bg-slate-700"
+              }`}
+            >
+              <div className="text-4xl">📚</div>
+
+              <h3 className="mt-4 text-xl font-bold">
+                Summary
+              </h3>
+
+              <p className="mt-2 text-sm opacity-80">
+                Short AI powered summaries.
+              </p>
+            </button>
+
+          </div>
+
+          <button
+            onClick={handleGenerate}
+            disabled={loading}
+            className={`mt-10 w-full rounded-2xl py-5 text-xl font-bold transition-all duration-300 ${
+              loading
+                ? "cursor-not-allowed bg-slate-700 text-slate-300"
+                : "bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 text-white shadow-xl hover:-translate-y-1 hover:shadow-blue-500/40"
+            }`}
+          >
+            {loading ? (
+              <div className="flex items-center justify-center gap-3">
+                <div className="h-6 w-6 animate-spin rounded-full border-4 border-white/30 border-t-white"></div>
+                Generating Study Material...
+              </div>
+            ) : (
+              "🚀 Generate Study Material"
+            )}
+          </button>
+
+        </div>
+
       </div>
+
     </div>
   );
 }

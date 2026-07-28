@@ -12,6 +12,7 @@ function Signup() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -29,14 +30,18 @@ function Signup() {
       const res = await api.post("/auth/signup", formData);
 
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem(
+        "user",
+        JSON.stringify(res.data.user)
+      );
 
       alert("Signup Successful!");
 
       navigate("/dashboard");
     } catch (error) {
       alert(
-        error.response?.data?.message || "Signup failed. Please try again."
+        error.response?.data?.message ||
+          "Signup failed. Please try again."
       );
     } finally {
       setLoading(false);
@@ -44,59 +49,176 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-6">
-          Create Account
-        </h1>
+    <div className="relative min-h-screen overflow-hidden bg-slate-950">
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3"
-            required
-          />
+      <div className="absolute -left-40 top-10 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl"></div>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3"
-            required
-          />
+      <div className="absolute right-0 bottom-0 h-[30rem] w-[30rem] rounded-full bg-violet-600/20 blur-3xl"></div>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3"
-            required
-          />
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-10">
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700"
-          >
-            {loading ? "Creating Account..." : "Sign Up"}
-          </button>
-        </form>
+        <div className="grid w-full max-w-6xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl lg:grid-cols-2">
 
-        <p className="text-center mt-4">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 font-semibold">
-            Login
-          </Link>
-        </p>
+          <div className="hidden flex-col justify-center bg-gradient-to-br from-violet-600 via-cyan-600 to-blue-700 p-12 lg:flex">
+
+            <div className="text-6xl">
+              ✨
+            </div>
+
+            <h1 className="mt-8 text-5xl font-extrabold text-white">
+              Join StudyGen AI
+            </h1>
+
+            <p className="mt-6 text-lg leading-8 text-cyan-100">
+              Create your account and unlock AI-powered learning.
+              Generate notes, summaries, flashcards, and quizzes
+              in just a few seconds.
+            </p>
+
+            <div className="mt-10 space-y-5 text-lg text-white">
+
+              <div>🚀 Instant AI Notes</div>
+
+              <div>🧠 Smart Flashcards</div>
+
+              <div>🎯 AI Quiz Generator</div>
+
+              <div>📄 Quick Study Summaries</div>
+
+            </div>
+
+          </div>
+
+          <div className="flex items-center justify-center p-8 md:p-12">
+
+            <div className="w-full max-w-md">
+
+              <div className="mb-10 text-center">
+
+                <div className="mb-4 text-5xl">
+                  👋
+                </div>
+
+                <h2 className="text-4xl font-bold text-white">
+                  Create Account
+                </h2>
+
+                <p className="mt-3 text-slate-400">
+                  Start your AI learning journey today
+                </p>
+
+              </div>
+
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+              >
+
+                <div>
+
+                  <label className="mb-2 block font-semibold text-slate-300">
+                    Full Name
+                  </label>
+
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your full name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-slate-700 bg-slate-800 p-4 text-white outline-none transition focus:border-cyan-500"
+                    required
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="mb-2 block font-semibold text-slate-300">
+                    Email Address
+                  </label>
+
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-slate-700 bg-slate-800 p-4 text-white outline-none transition focus:border-cyan-500"
+                    required
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="mb-2 block font-semibold text-slate-300">
+                    Password
+                  </label>
+
+                  <div className="relative">
+
+                    <input
+                      type={
+                        showPassword
+                          ? "text"
+                          : "password"
+                      }
+                      name="password"
+                      placeholder="Create a password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className="w-full rounded-2xl border border-slate-700 bg-slate-800 p-4 pr-14 text-white outline-none transition focus:border-cyan-500"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowPassword(!showPassword)
+                      }
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                    >
+                      {showPassword ? "🙈" : "👁️"}
+                    </button>
+
+                  </div>
+
+                </div>
+                                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 py-4 text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/30 disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {loading
+                    ? "Creating Account..."
+                    : "✨ Create Account"}
+                </button>
+
+              </form>
+
+              <div className="mt-8 text-center">
+
+                <p className="text-slate-400">
+                  Already have an account?{" "}
+                  <Link
+                    to="/login"
+                    className="font-semibold text-cyan-400 transition hover:text-cyan-300"
+                  >
+                    Login
+                  </Link>
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
+
     </div>
   );
 }
