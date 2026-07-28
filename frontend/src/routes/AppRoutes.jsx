@@ -23,32 +23,30 @@ function AppRoutes() {
     <BrowserRouter>
       <Routes>
 
-        {/* Public Pages */}
+        {/* Public Routes */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+        </Route>
 
+        {/* Protected Routes */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/generate" element={<Generate />} />
           <Route path="/results" element={<Results />} />
           <Route path="/flashcards" element={<Flashcards />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/summary" element={<Summary />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
-
-        {/* Dashboard Pages */}
-        <Route
-  element={
-    <ProtectedRoute>
-      <DashboardLayout />
-    </ProtectedRoute>
-  }
->
-  <Route path="/dashboard" element={<Dashboard />} />
-  <Route path="/history" element={<History />} />
-  <Route path="/settings" element={<Settings />} />
-</Route>
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />

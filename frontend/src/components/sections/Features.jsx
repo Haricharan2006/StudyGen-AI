@@ -23,12 +23,20 @@ function Features() {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section
+      id="features"
+      className="py-24 bg-white"
+    >
       <div className="max-w-7xl mx-auto px-8">
 
         <h2 className="text-5xl font-bold text-center mb-16">
           Features
         </h2>
+
+        <p className="text-center text-gray-600 text-lg max-w-3xl mx-auto mb-16">
+          Everything you need to study smarter using Artificial Intelligence.
+          Create notes, flashcards and quizzes within seconds after logging in.
+        </p>
 
         <div className="grid md:grid-cols-3 gap-10">
 
@@ -36,7 +44,7 @@ function Features() {
 
             <div
               key={index}
-              className="bg-blue-50 rounded-2xl shadow-lg p-8 hover:shadow-2xl transition"
+              className="bg-blue-50 rounded-2xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition duration-300"
             >
               <div className="text-blue-600 mb-6">
                 {feature.icon}

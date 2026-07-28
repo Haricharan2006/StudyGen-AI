@@ -10,15 +10,16 @@ const {
 } = require("../services/historyService");
 
 // Get History
-router.get("/", authMiddleware, (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    const history = getHistory();
+    const history = await getHistory(req.user.id);
 
     res.json({
       success: true,
       history,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch history.",
@@ -27,7 +28,7 @@ router.get("/", authMiddleware, (req, res) => {
 });
 
 // Save History
-router.post("/", authMiddleware, (req, res) => {
+router.post("/", authMiddleware, async (req, res) => {
   try {
     const { topic, type, content } = req.body;
 
@@ -38,7 +39,7 @@ router.post("/", authMiddleware, (req, res) => {
       });
     }
 
-    const newHistory = addHistory({
+    const newHistory = await addHistory(req.user.id, {
       topic: topic || "Untitled",
       type,
       content,
@@ -49,6 +50,7 @@ router.post("/", authMiddleware, (req, res) => {
       history: newHistory,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       success: false,
       message: "Failed to save history.",
@@ -57,15 +59,16 @@ router.post("/", authMiddleware, (req, res) => {
 });
 
 // Delete History
-router.delete("/:id", authMiddleware, (req, res) => {
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    deleteHistory(req.params.id);
+    await deleteHistory(req.user.id, req.params.id);
 
     res.json({
       success: true,
       message: "History deleted successfully.",
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       success: false,
       message: "Failed to delete history.",

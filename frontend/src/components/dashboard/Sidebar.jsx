@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaBook,
@@ -6,9 +6,17 @@ import {
   FaQuestionCircle,
   FaHistory,
   FaCog,
+  FaSignOutAlt,
 } from "react-icons/fa";
 
 function Sidebar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <aside className="fixed top-0 left-0 w-64 h-screen bg-blue-700 text-white p-6">
 
@@ -31,7 +39,7 @@ function Sidebar() {
           className="flex items-center gap-3 hover:text-yellow-300"
         >
           <FaBook />
-          Generate
+          AI Notes
         </NavLink>
 
         <NavLink
@@ -65,6 +73,14 @@ function Sidebar() {
           <FaCog />
           Settings
         </NavLink>
+
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 hover:text-red-300 mt-10"
+        >
+          <FaSignOutAlt />
+          Logout
+        </button>
 
       </nav>
 
