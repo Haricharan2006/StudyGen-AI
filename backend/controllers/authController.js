@@ -31,15 +31,17 @@ const signup = async (req, res) => {
       password: hashedPassword,
     });
 
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is missing in environment variables.");
+    }
+
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "7d",
-      }
+      { expiresIn: "7d" }
     );
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Signup successful",
       token,
@@ -49,12 +51,16 @@ const signup = async (req, res) => {
         email: user.email,
       },
     });
-  } catch (error) {
-    console.error(error);
 
-    res.status(500).json({
+  } catch (error) {
+    console.error("========== SIGNUP ERROR ==========");
+    console.error(error);
+    console.error("==================================");
+
+    return res.status(500).json({
       success: false,
-      message: "Signup failed.",
+      message: error.message,
+      error: process.env.NODE_ENV === "production" ? undefined : error.stack,
     });
   }
 };
@@ -89,15 +95,17 @@ const login = async (req, res) => {
       });
     }
 
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is missing in environment variables.");
+    }
+
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "7d",
-      }
+      { expiresIn: "7d" }
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Login successful",
       token,
@@ -107,12 +115,16 @@ const login = async (req, res) => {
         email: user.email,
       },
     });
-  } catch (error) {
-    console.error(error);
 
-    res.status(500).json({
+  } catch (error) {
+    console.error("========== LOGIN ERROR ==========");
+    console.error(error);
+    console.error("=================================");
+
+    return res.status(500).json({
       success: false,
-      message: "Login failed.",
+      message: error.message,
+      error: process.env.NODE_ENV === "production" ? undefined : error.stack,
     });
   }
 };
