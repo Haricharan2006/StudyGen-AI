@@ -15,7 +15,7 @@ function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-8 py-16">
 
-        <div className="grid items-center gap-16 lg:grid-cols-2">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
 
           <div>
 
@@ -24,7 +24,6 @@ function Hero() {
             </span>
 
             <h1 className="mt-8 text-5xl font-extrabold leading-tight text-white md:text-7xl">
-
               Learn
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 {" "}Smarter
@@ -36,16 +35,13 @@ function Hero() {
               <span className="bg-gradient-to-r from-violet-400 to-pink-500 bg-clip-text text-transparent">
                 {" "}StudyGen AI
               </span>
-
             </h1>
 
             <p className="mt-8 max-w-2xl text-xl leading-9 text-slate-300">
-
               Generate AI-powered notes, quizzes,
               flashcards, and summaries within seconds.
               Study faster, retain more, and prepare
               confidently for every exam.
-
             </p>
 
             <div className="mt-12 flex flex-wrap gap-5">
@@ -107,65 +103,17 @@ function Hero() {
             </div>
 
           </div>
+                    <div className="relative flex justify-center lg:pl-8">
 
-          <div className="relative flex justify-center">
-
-            <div className="absolute -top-6 left-0 rounded-2xl border border-cyan-500/30 bg-slate-900/90 px-5 py-4 shadow-xl backdrop-blur-md">
-
-              <div className="text-sm font-semibold text-cyan-300">
-                ⚡ AI Notes
-              </div>
-
-              <div className="mt-1 text-slate-300">
-                Generated in Seconds
-              </div>
-
-            </div>
-
-            <div className="absolute -right-4 bottom-16 rounded-2xl border border-violet-500/30 bg-slate-900/90 px-5 py-4 shadow-xl backdrop-blur-md">
-
-              <div className="text-sm font-semibold text-violet-300">
-                🎯 AI Quiz
-              </div>
-
-              <div className="mt-1 text-slate-300">
-                Practice Smarter
-              </div>
-
-            </div>
-                        <div className="relative">
+            <div className="relative">
 
               <img
                 src={heroImage}
                 alt="AI Study Assistant"
-                className="relative z-10 w-full max-w-xl rounded-[2rem] border border-slate-700 shadow-2xl"
+                className="relative z-10 w-full max-w-xl xl:max-w-2xl rounded-[2rem] border border-slate-700 shadow-2xl"
               />
 
-              <div className="absolute -bottom-8 left-8 z-20 rounded-2xl border border-emerald-500/30 bg-slate-900/95 px-6 py-4 shadow-xl backdrop-blur-md">
-
-                <div className="text-sm font-semibold text-emerald-300">
-                  📄 Smart Summaries
-                </div>
-
-                <div className="mt-1 text-slate-300">
-                  Study 5x Faster
-                </div>
-
-              </div>
-
-              <div className="absolute -right-6 top-1/3 z-20 rounded-2xl border border-blue-500/30 bg-slate-900/95 px-6 py-4 shadow-xl backdrop-blur-md">
-
-                <div className="text-sm font-semibold text-blue-300">
-                  🧠 Flashcards
-                </div>
-
-                <div className="mt-1 text-slate-300">
-                  Boost Memory
-                </div>
-
-              </div>
-
-              <div className="absolute inset-0 -z-10 rounded-full bg-cyan-500/10 blur-3xl"></div>
+              <div className="absolute inset-0 -z-10 scale-125 rounded-full bg-gradient-to-r from-cyan-500/20 via-blue-500/10 to-violet-500/20 blur-3xl"></div>
 
             </div>
 
