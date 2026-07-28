@@ -41,21 +41,23 @@ function QuickActions() {
   ];
 
   return (
-    <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-xl">
+    <div className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-xl sm:p-6">
 
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex items-center justify-between">
 
         <div>
-          <h2 className="text-2xl font-bold text-white">
+
+          <h2 className="text-xl font-bold text-white sm:text-2xl">
             Quick Actions
           </h2>
 
           <p className="mt-1 text-sm text-slate-400">
             Jump directly to your favorite tools
           </p>
+
         </div>
 
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-500 text-2xl shadow-lg">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-500 text-xl shadow-lg sm:h-12 sm:w-12 sm:text-2xl">
           ⚡
         </div>
 
@@ -64,29 +66,35 @@ function QuickActions() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
         {actions.map((action) => (
+
           <button
             key={action.title}
             onClick={() => navigate(action.route)}
-            className={`group rounded-2xl bg-gradient-to-r ${action.color} p-5 text-left text-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl`}
+            className={`group rounded-2xl bg-gradient-to-r ${action.color} p-4 text-left text-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl sm:p-5`}
           >
-            <div className="flex items-center justify-between">
 
-              <div>
-                <h3 className="text-lg font-bold">
+            <div className="flex items-center justify-between gap-4">
+
+              <div className="min-w-0 flex-1">
+
+                <h3 className="truncate text-lg font-bold">
                   {action.title}
                 </h3>
 
                 <p className="mt-1 text-sm text-white/80">
                   {action.subtitle}
                 </p>
+
               </div>
 
-              <div className="rounded-xl bg-white/20 p-3 text-2xl transition-transform duration-300 group-hover:rotate-12">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-white/20 text-xl transition-transform duration-300 group-hover:rotate-12 sm:h-14 sm:w-14 sm:text-2xl">
                 {action.icon}
               </div>
 
             </div>
+
           </button>
+
         ))}
 
       </div>

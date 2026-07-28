@@ -37,35 +37,40 @@ function Dashboard() {
     <>
       <Topbar />
 
-      <div className="min-h-screen bg-slate-950 px-6 py-8 md:px-10">
+      <div className="min-h-screen bg-slate-950 px-4 py-6 sm:px-6 md:px-8 lg:px-10 lg:py-8">
 
         {/* Welcome Section */}
-        <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between">
+        <div className="mb-8 flex flex-col gap-6 lg:mb-10 lg:flex-row lg:items-center lg:justify-between">
 
           <div>
-            <h1 className="text-4xl font-extrabold text-white">
+
+            <h1 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
               Welcome Back 👋
             </h1>
 
-            <p className="mt-3 text-slate-400 text-lg">
+            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">
               Manage your AI study materials from one beautiful dashboard.
             </p>
+
           </div>
 
-          <div className="mt-6 md:mt-0 rounded-2xl border border-slate-700 bg-slate-900 px-6 py-4 shadow-xl">
+          <div className="w-full rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-xl sm:w-auto sm:min-w-[240px]">
+
             <p className="text-sm text-slate-400">
               Total AI Generations
             </p>
 
-            <h2 className="mt-2 text-3xl font-bold text-blue-400">
+            <h2 className="mt-2 text-3xl font-bold text-cyan-400 sm:text-4xl">
               {stats.total}
             </h2>
+
           </div>
 
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        {/* Statistics */}
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
 
           <StatsCard
             title="Notes"
@@ -94,13 +99,14 @@ function Dashboard() {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-10 grid grid-cols-1 gap-8 xl:grid-cols-2">
 
-          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-xl">
+        <div className="mt-8 grid grid-cols-1 gap-6 xl:mt-10 xl:grid-cols-2 xl:gap-8">
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-xl sm:p-6">
             <RecentActivity />
           </div>
 
-          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-xl">
+          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-xl sm:p-6">
             <QuickActions />
           </div>
 

@@ -48,15 +48,12 @@ function Generate() {
         case "flashcards":
           navigate("/flashcards", { state: data });
           break;
-
         case "quiz":
           navigate("/quiz", { state: data });
           break;
-
         case "summary":
           navigate("/summary", { state: data });
           break;
-
         default:
           navigate("/results", { state: data });
       }
@@ -68,27 +65,34 @@ function Generate() {
     }
   };
 
+  const cardClass = (name, active, activeStyle, hoverStyle) =>
+    `rounded-2xl border p-5 sm:p-6 text-left transition-all duration-300 ${
+      active === name
+        ? activeStyle
+        : `border-slate-700 bg-slate-800 text-slate-300 ${hoverStyle}`
+    }`;
+
   return (
-    <div className="min-h-screen bg-slate-950 px-6 py-10">
+    <div className="min-h-screen bg-slate-950 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
 
-      <div className="mx-auto max-w-6xl rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl">
+      <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl">
 
-        <div className="rounded-t-3xl bg-gradient-to-r from-blue-700 via-cyan-600 to-indigo-700 p-10">
+        <div className="bg-gradient-to-r from-blue-700 via-cyan-600 to-indigo-700 px-6 py-8 text-center sm:px-8 sm:py-10">
 
-          <h1 className="text-center text-5xl font-extrabold text-white">
+          <h1 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
             🚀 AI Study Generator
           </h1>
 
-          <p className="mt-4 text-center text-lg text-blue-100">
-            Generate AI-powered Notes, Flashcards, Quizzes and Summaries
-            instantly from a topic or uploaded document.
+          <p className="mx-auto mt-4 max-w-3xl text-sm text-blue-100 sm:text-base lg:text-lg">
+            Generate AI-powered Notes, Flashcards, Quizzes and
+            Summaries instantly from a topic or uploaded document.
           </p>
 
         </div>
 
-        <div className="p-8">
+        <div className="p-5 sm:p-8">
 
-          <label className="mb-3 block text-lg font-semibold text-white">
+          <label className="mb-3 block text-base font-semibold text-white sm:text-lg">
             Study Topic
           </label>
 
@@ -100,21 +104,21 @@ function Generate() {
             className="mb-8 w-full rounded-2xl border border-slate-700 bg-slate-800 p-4 text-white placeholder:text-slate-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          <label className="mb-4 block text-lg font-semibold text-white">
+          <label className="mb-4 block text-base font-semibold text-white sm:text-lg">
             Upload PDF / DOCX
           </label>
 
-          <label className="group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed border-blue-500 bg-slate-800 p-12 transition-all duration-300 hover:border-cyan-400 hover:bg-slate-700">
+          <label className="group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed border-blue-500 bg-slate-800 px-6 py-10 text-center transition-all duration-300 hover:border-cyan-400 hover:bg-slate-700 sm:px-10 sm:py-12">
 
-            <div className="mb-5 text-7xl transition-transform duration-300 group-hover:scale-110">
+            <div className="mb-4 text-5xl transition-transform duration-300 group-hover:scale-110 sm:text-7xl">
               📄
             </div>
 
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-xl font-bold text-white sm:text-2xl">
               Drag & Drop or Click to Upload
             </h2>
 
-            <p className="mt-3 text-slate-400">
+            <p className="mt-3 text-sm text-slate-400 sm:text-base">
               Supports PDF and DOCX files (Max 10 MB)
             </p>
 
@@ -134,32 +138,30 @@ function Generate() {
                 ✅ File Selected
               </p>
 
-              <p className="mt-2 text-white">
+              <p className="mt-2 break-all text-white">
                 {file.name}
               </p>
 
             </div>
           )}
 
-          <label className="mb-4 mt-10 block text-lg font-semibold text-white">
+          <label className="mb-4 mt-10 block text-base font-semibold text-white sm:text-lg">
             Choose Output Type
           </label>
-                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
 
             <button
               onClick={() => setType("notes")}
-              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
-                type === "notes"
-                  ? "border-blue-500 bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-xl"
-                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-blue-500 hover:bg-slate-700"
-              }`}
+              className={cardClass(
+                "notes",
+                type,
+                "border-blue-500 bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-xl",
+                "hover:border-blue-500 hover:bg-slate-700"
+              )}
             >
               <div className="text-4xl">📝</div>
-
-              <h3 className="mt-4 text-xl font-bold">
-                Notes
-              </h3>
-
+              <h3 className="mt-4 text-lg font-bold sm:text-xl">Notes</h3>
               <p className="mt-2 text-sm opacity-80">
                 Detailed AI generated notes.
               </p>
@@ -167,18 +169,17 @@ function Generate() {
 
             <button
               onClick={() => setType("flashcards")}
-              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
-                type === "flashcards"
-                  ? "border-emerald-500 bg-gradient-to-br from-emerald-600 to-green-500 text-white shadow-xl"
-                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-emerald-500 hover:bg-slate-700"
-              }`}
+              className={cardClass(
+                "flashcards",
+                type,
+                "border-emerald-500 bg-gradient-to-br from-emerald-600 to-green-500 text-white shadow-xl",
+                "hover:border-emerald-500 hover:bg-slate-700"
+              )}
             >
               <div className="text-4xl">🧠</div>
-
-              <h3 className="mt-4 text-xl font-bold">
+              <h3 className="mt-4 text-lg font-bold sm:text-xl">
                 Flashcards
               </h3>
-
               <p className="mt-2 text-sm opacity-80">
                 Revise quickly with AI cards.
               </p>
@@ -186,18 +187,15 @@ function Generate() {
 
             <button
               onClick={() => setType("quiz")}
-              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
-                type === "quiz"
-                  ? "border-violet-500 bg-gradient-to-br from-violet-600 to-fuchsia-500 text-white shadow-xl"
-                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-violet-500 hover:bg-slate-700"
-              }`}
+              className={cardClass(
+                "quiz",
+                type,
+                "border-violet-500 bg-gradient-to-br from-violet-600 to-fuchsia-500 text-white shadow-xl",
+                "hover:border-violet-500 hover:bg-slate-700"
+              )}
             >
               <div className="text-4xl">❓</div>
-
-              <h3 className="mt-4 text-xl font-bold">
-                Quiz
-              </h3>
-
+              <h3 className="mt-4 text-lg font-bold sm:text-xl">Quiz</h3>
               <p className="mt-2 text-sm opacity-80">
                 Test your understanding.
               </p>
@@ -205,18 +203,17 @@ function Generate() {
 
             <button
               onClick={() => setType("summary")}
-              className={`rounded-2xl border p-6 text-left transition-all duration-300 ${
-                type === "summary"
-                  ? "border-orange-500 bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-xl"
-                  : "border-slate-700 bg-slate-800 text-slate-300 hover:border-orange-500 hover:bg-slate-700"
-              }`}
+              className={cardClass(
+                "summary",
+                type,
+                "border-orange-500 bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-xl",
+                "hover:border-orange-500 hover:bg-slate-700"
+              )}
             >
               <div className="text-4xl">📚</div>
-
-              <h3 className="mt-4 text-xl font-bold">
+              <h3 className="mt-4 text-lg font-bold sm:text-xl">
                 Summary
               </h3>
-
               <p className="mt-2 text-sm opacity-80">
                 Short AI powered summaries.
               </p>
@@ -227,7 +224,7 @@ function Generate() {
           <button
             onClick={handleGenerate}
             disabled={loading}
-            className={`mt-10 w-full rounded-2xl py-5 text-xl font-bold transition-all duration-300 ${
+            className={`mt-10 w-full rounded-2xl py-4 text-lg font-bold transition-all duration-300 sm:py-5 sm:text-xl ${
               loading
                 ? "cursor-not-allowed bg-slate-700 text-slate-300"
                 : "bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 text-white shadow-xl hover:-translate-y-1 hover:shadow-blue-500/40"

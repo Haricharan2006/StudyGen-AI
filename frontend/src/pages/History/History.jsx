@@ -46,15 +46,12 @@ function History() {
       case "flashcards":
         navigate("/flashcards", { state: data });
         break;
-
       case "quiz":
         navigate("/quiz", { state: data });
         break;
-
       case "summary":
         navigate("/summary", { state: data });
         break;
-
       default:
         navigate("/results", { state: data });
     }
@@ -95,23 +92,23 @@ function History() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 px-6 py-10">
+    <div className="min-h-screen bg-slate-950 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
 
-      <div className="mx-auto max-w-7xl rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl">
 
-        <div className="rounded-t-3xl bg-gradient-to-r from-violet-700 via-blue-600 to-cyan-600 p-10">
+        <div className="bg-gradient-to-r from-violet-700 via-blue-600 to-cyan-600 px-6 py-8 text-center sm:px-8 sm:py-10">
 
-          <h1 className="text-center text-5xl font-extrabold text-white">
+          <h1 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
             📜 Study History
           </h1>
 
-          <p className="mt-4 text-center text-lg text-blue-100">
+          <p className="mx-auto mt-4 max-w-3xl text-sm text-blue-100 sm:text-base lg:text-lg">
             Access every AI-generated note, quiz, flashcard and summary from one place.
           </p>
 
         </div>
 
-        <div className="p-8">
+        <div className="p-5 sm:p-8">
 
           <div className="mb-8">
 
@@ -126,29 +123,32 @@ function History() {
           </div>
 
           {loading ? (
+
             <div className="flex justify-center py-20">
 
               <div className="flex items-center gap-4">
 
-                <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-600 border-t-blue-500"></div>
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-600 border-t-blue-500 sm:h-10 sm:w-10"></div>
 
-                <span className="text-xl text-slate-300">
+                <span className="text-lg text-slate-300 sm:text-xl">
                   Loading History...
                 </span>
 
               </div>
 
             </div>
+
           ) : filteredHistory.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-slate-700 py-20 text-center">
 
-              <div className="text-7xl">📂</div>
+            <div className="rounded-2xl border border-dashed border-slate-700 py-16 text-center sm:py-20">
 
-              <h2 className="mt-6 text-3xl font-bold text-white">
+              <div className="text-5xl sm:text-7xl">📂</div>
+
+              <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl">
                 No History Found
               </h2>
 
-              <p className="mt-3 text-slate-400">
+              <p className="mt-3 px-4 text-sm text-slate-400 sm:text-base">
                 Generate some study materials to see them here.
               </p>
 
@@ -156,27 +156,29 @@ function History() {
 
           ) : (
 
-            <div className="space-y-6">
+            <div className="space-y-5">
 
-  {filteredHistory.map((item) => (
+              {filteredHistory.map((item) => (
+
                 <div
                   key={item._id}
-                  className="group rounded-2xl border border-slate-700 bg-slate-800 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10"
+                  className="group rounded-2xl border border-slate-700 bg-slate-800 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 sm:p-6"
                 >
-                  <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+
+                  <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
                     <div
                       onClick={() => openHistory(item)}
-                      className="flex flex-1 cursor-pointer items-start gap-4"
+                      className="flex min-w-0 flex-1 cursor-pointer gap-4"
                     >
 
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-700 text-3xl">
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-slate-700 text-2xl sm:h-14 sm:w-14 sm:text-3xl">
                         {getIcon(item.type)}
                       </div>
 
-                      <div className="flex-1">
+                      <div className="min-w-0 flex-1">
 
-                        <h2 className="text-2xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400">
+                        <h2 className="break-words text-xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400 sm:text-2xl">
                           {item.topic}
                         </h2>
 
@@ -190,7 +192,7 @@ function History() {
                             {item.type}
                           </span>
 
-                          <span className="text-sm text-slate-400">
+                          <span className="text-xs text-slate-400 sm:text-sm">
                             {new Date(item.createdAt).toLocaleString()}
                           </span>
 
@@ -202,13 +204,15 @@ function History() {
 
                     <button
                       onClick={() => deleteItem(item._id)}
-                      className="rounded-xl bg-gradient-to-r from-red-500 to-red-600 px-5 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-red-600 hover:to-red-700"
+                      className="w-full rounded-xl bg-gradient-to-r from-red-500 to-red-600 px-5 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-red-600 hover:to-red-700 sm:w-auto"
                     >
                       🗑 Delete
                     </button>
 
                   </div>
+
                 </div>
+
               ))}
 
             </div>

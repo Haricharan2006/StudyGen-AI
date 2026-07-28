@@ -36,7 +36,6 @@ function Signup() {
       );
 
       alert("Signup Successful!");
-
       navigate("/dashboard");
     } catch (error) {
       alert(
@@ -51,15 +50,17 @@ function Signup() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950">
 
-      <div className="absolute -left-40 top-10 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl"></div>
+      <div className="absolute -left-40 top-10 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl sm:h-96 sm:w-96"></div>
 
-      <div className="absolute right-0 bottom-0 h-[30rem] w-[30rem] rounded-full bg-violet-600/20 blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-violet-600/20 blur-3xl sm:h-[30rem] sm:w-[30rem]"></div>
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-10">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-8 sm:px-6 sm:py-10">
 
         <div className="grid w-full max-w-6xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl lg:grid-cols-2">
 
-          <div className="hidden flex-col justify-center bg-gradient-to-br from-violet-600 via-cyan-600 to-blue-700 p-12 lg:flex">
+          {/* Left Panel */}
+
+          <div className="hidden flex-col justify-center bg-gradient-to-br from-violet-600 via-cyan-600 to-blue-700 p-10 lg:flex xl:p-12">
 
             <div className="text-6xl">
               ✨
@@ -89,21 +90,23 @@ function Signup() {
 
           </div>
 
-          <div className="flex items-center justify-center p-8 md:p-12">
+          {/* Right Panel */}
+
+          <div className="flex items-center justify-center p-6 sm:p-8 md:p-10 lg:p-12">
 
             <div className="w-full max-w-md">
 
-              <div className="mb-10 text-center">
+              <div className="mb-8 text-center sm:mb-10">
 
-                <div className="mb-4 text-5xl">
+                <div className="mb-4 text-4xl sm:text-5xl">
                   👋
                 </div>
 
-                <h2 className="text-4xl font-bold text-white">
+                <h2 className="text-3xl font-bold text-white sm:text-4xl">
                   Create Account
                 </h2>
 
-                <p className="mt-3 text-slate-400">
+                <p className="mt-3 text-sm text-slate-400 sm:text-base">
                   Start your AI learning journey today
                 </p>
 
@@ -116,7 +119,7 @@ function Signup() {
 
                 <div>
 
-                  <label className="mb-2 block font-semibold text-slate-300">
+                  <label className="mb-2 block text-sm font-semibold text-slate-300">
                     Full Name
                   </label>
 
@@ -134,7 +137,7 @@ function Signup() {
 
                 <div>
 
-                  <label className="mb-2 block font-semibold text-slate-300">
+                  <label className="mb-2 block text-sm font-semibold text-slate-300">
                     Email Address
                   </label>
 
@@ -152,18 +155,14 @@ function Signup() {
 
                 <div>
 
-                  <label className="mb-2 block font-semibold text-slate-300">
+                  <label className="mb-2 block text-sm font-semibold text-slate-300">
                     Password
                   </label>
 
                   <div className="relative">
 
                     <input
-                      type={
-                        showPassword
-                          ? "text"
-                          : "password"
-                      }
+                      type={showPassword ? "text" : "password"}
                       name="password"
                       placeholder="Create a password"
                       value={formData.password}
@@ -177,7 +176,7 @@ function Signup() {
                       onClick={() =>
                         setShowPassword(!showPassword)
                       }
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-slate-400 transition hover:text-white"
                     >
                       {showPassword ? "🙈" : "👁️"}
                     </button>
@@ -185,10 +184,11 @@ function Signup() {
                   </div>
 
                 </div>
-                                <button
+
+                <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 py-4 text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/30 disabled:cursor-not-allowed disabled:opacity-70"
+                  className="w-full rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 py-4 text-base font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-500/30 disabled:cursor-not-allowed disabled:opacity-70 sm:text-lg"
                 >
                   {loading
                     ? "Creating Account..."
@@ -199,7 +199,7 @@ function Signup() {
 
               <div className="mt-8 text-center">
 
-                <p className="text-slate-400">
+                <p className="text-sm text-slate-400 sm:text-base">
                   Already have an account?{" "}
                   <Link
                     to="/login"
