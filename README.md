@@ -12,6 +12,9 @@ https://studygen-frontend.onrender.com
 ### Backend
 https://studygen-backend-nqxi.onrender.com
 
+### Short Screening Explanation Video
+https://drive.google.com/file/d/1gE-r8bM8gZnN58cSUb06TYx9I6BQd2J5/view?usp=sharing
+
 ---
 
 # 📖 Table of Contents
