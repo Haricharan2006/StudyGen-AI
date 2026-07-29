@@ -172,7 +172,7 @@ Generate Study Material
 
 ↓
 
-Google Gemini AI
+Groq AI
 
 ↓
 
