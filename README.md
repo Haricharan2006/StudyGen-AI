@@ -86,7 +86,7 @@ The application provides secure authentication, organized history management, an
 
 ## AI
 
-- Google Gemini AI
+- Groq AI
 
 ## Deployment
 
@@ -108,7 +108,7 @@ Express Backend API
 
 ↓
 
-Google Gemini AI
+Groq AI
 
 ↓
 
