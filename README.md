@@ -42,7 +42,7 @@ https://drive.google.com/file/d/1gE-r8bM8gZnN58cSUb06TYx9I6BQd2J5/view?usp=shari
 
 # 📌 Introduction
 
-StudyGen AI is a MERN Stack web application that leverages Google Gemini AI to generate study materials automatically from a user-provided topic. Instead of spending hours preparing notes or quizzes manually, students can generate learning content within seconds.
+StudyGen AI is a MERN Stack web application that leverages Google Gemini AI to generate study materials automatically from a user-provided topic. Instead of spending hours preparing notes or quizzes manually,students can generate learning content within seconds.
 
 The application provides secure authentication, organized history management, and multiple study formats, making learning more efficient and interactive.
 
